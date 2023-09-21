@@ -118,30 +118,78 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Add" xml:space="preserve">
-    <value>اضافة</value>
+    <value>أضافة</value>
   </data>
-  <data name="Addresses" xml:space="preserve">
-    <value>العناوين</value>
+  <data name="Address" xml:space="preserve">
+    <value>العنوان</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>الغاء</value>
+  </data>
+  <data name="ChangeLanguage" xml:space="preserve">
+    <value>تغير اللغة</value>
+  </data>
+  <data name="City" xml:space="preserve">
+    <value>المدينة</value>
   </data>
   <data name="Contact" xml:space="preserve">
     <value>جهة الاتصال</value>
   </data>
+  <data name="Contacts" xml:space="preserve">
+    <value>جهات الاتصال</value>
+  </data>
+  <data name="ContactsApplication" xml:space="preserve">
+    <value>تطبيق جهات الاتصال</value>
+  </data>
+  <data name="Country" xml:space="preserve">
+    <value>الدولة</value>
+  </data>
   <data name="Delete" xml:space="preserve">
     <value>حذف</value>
   </data>
-  <data name="Detatils" xml:space="preserve">
+  <data name="DeleteMessage" xml:space="preserve">
+    <value>هل تريد حذف هذا العنصر ؟</value>
+  </data>
+  <data name="Details" xml:space="preserve">
     <value>تفاصيل</value>
   </data>
   <data name="Edit" xml:space="preserve">
     <value>تعديل</value>
   </data>
+  <data name="Home" xml:space="preserve">
+    <value>الرئيسية</value>
+  </data>
+  <data name="Index" xml:space="preserve">
+    <value>المسلسل</value>
+  </data>
+  <data name="MoreInfo" xml:space="preserve">
+    <value>معلومات اخري</value>
+  </data>
   <data name="Name" xml:space="preserve">
     <value>الاسم</value>
+  </data>
+  <data name="New" xml:space="preserve">
+    <value>جديد</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>التالي</value>
   </data>
   <data name="Notes" xml:space="preserve">
     <value>الملاحظات</value>
   </data>
+  <data name="Operations" xml:space="preserve">
+    <value>العمليات</value>
+  </data>
   <data name="Phone" xml:space="preserve">
     <value>الهاتف</value>
+  </data>
+  <data name="Previous" xml:space="preserve">
+    <value>السابق</value>
+  </data>
+  <data name="Requierd" xml:space="preserve">
+    <value>هذا الحقل مطلوب</value>
+  </data>
+  <data name="Street" xml:space="preserve">
+    <value>الشارع</value>
   </data>
 </root>

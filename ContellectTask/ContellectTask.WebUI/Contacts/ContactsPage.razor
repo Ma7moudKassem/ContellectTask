@@ -1,0 +1,55 @@
+﻿@page "/"
+
+<ContactsForm Contact="@contact"
+              ShowForm="@showForm"
+              FeatureType="@featureType"
+              OnCancel="@OnCancel"
+              OnContactObjectChange="OnContactObjectChange" />
+
+@if (!showForm)
+{
+    <div class="col mt-4 mb-4">
+        <button type="button" class="btn btn-primary" onclick="@(()=>ShowForm(FeatureType.Add,new Contact()))">@_localizer[Resource.New]</button>
+    </div>
+
+    <table class="table table-striped table-bordered shadow p-3 mb-2 bg-white rounded">
+        <thead>
+            <tr>
+                <th scope="col">@Resource.Index</th>
+                <th scope="col">@Resource.Name</th>
+                <th scope="col">@Resource.Phone</th>
+                <th scope="col">@Resource.Address</th>
+                <th scope="col">@Resource.Operations</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Contact context in contacts)
+            {
+                <tr>
+                    <td>@context.Index</td>
+                    <td>@context.Name</td>
+                    <td>@context.Phone</td>
+                    <td>@context.Address</td>
+                    <td>
+                        <button type="button" class="btn btn-primary" @onclick="@(()=> ShowForm(FeatureType.Edit,context))">@Resource.Edit</button>
+                        <button type="button" class="btn btn-success" @onclick="@(()=> ShowForm(FeatureType.Details,context))">@Resource.Details</button>
+                        <button type="button" class="btn btn-danger" @onclick="@(()=> ShowForm(FeatureType.Delete,context))">@Resource.Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <ul class="pagination justify-content-end">
+        <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1">@Resource.Previous</a>
+        </li>
+        @for (int i = 0; i < paginated.MetaData.TotalPages; i++)
+        {
+            <li class="page-item"><a class="page-link" onclick="@(()=>OnPaginationChange(i))">@(i + 1)</a></li>
+        }
+        <li class="page-item">
+            <a class="page-link" href="#">@Resource.Next</a>
+        </li>
+    </ul>
+}

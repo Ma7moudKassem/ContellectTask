@@ -8,7 +8,7 @@ public class ContactEntityConfiguration : BaseEntityConfiguration<Contact>
 
         builder.Property(x => x.Name)
                .IsRequired(true)
-               .HasMaxLength(500);
+               .HasMaxLength(200);
 
         builder.HasIndex(x => x.Name)
                 .IsUnique(true);
@@ -20,15 +20,13 @@ public class ContactEntityConfiguration : BaseEntityConfiguration<Contact>
         builder.HasIndex(x => x.Phone)
                .IsUnique(true);
 
+        builder.Property(x => x.Address)
+               .IsRequired(true)
+               .HasMaxLength(500);
+
         builder.Property(x => x.Notes)
                .IsRequired(false)
                .HasMaxLength(1000);
-
-        builder.HasMany(x => x.ContactAddresses)
-               .WithOne()
-               .HasForeignKey(x => x.ContactId)
-               .OnDelete(DeleteBehavior.Cascade)
-               .HasConstraintName("FK_Contact_ContactAddresses_ContactId");
 
         base.Configure(builder);
     }

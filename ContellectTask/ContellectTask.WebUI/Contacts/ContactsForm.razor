@@ -1,0 +1,56 @@
+﻿@if (!ShowForm)
+{
+    <div class="mb-4" style="font-size:30px">@Resource.Contacts</div>
+}
+
+@if (ShowForm)
+{
+    <div class="card shadow mb-5 bg-white rounded">
+        <div class="card-header">
+            <h3>@_localizer[FeatureType.ToString()] @Resource.Contact</h3>
+        </div>
+        <EditForm Model="@Contact" OnValidSubmit="@OnValidSubmit">
+            <FluentValidationValidator />
+            <div class="card-body">
+                @if (FeatureType.Equals(FeatureType.Delete))
+                {
+                    <div class="alert alert-danger" role="alert">
+                        @_localizer[Resource.DeleteMessage]
+                    </div>
+                }
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label>@Resource.Name</label>
+                        <span class="text-danger">*</span>
+                        <InputText class="form-control" @bind-Value="Contact.Name" disabled="@disabledInput" />
+                        <ValidationMessage For="@(()=>Contact.Name)" />
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label>@Resource.Phone</label>
+                        <span class="text-danger">*</span>
+                        <InputText class="form-control" @bind-Value="Contact.Phone" disabled="@disabledInput" />
+                        <ValidationMessage For="@(()=>Contact.Phone)" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label>@Resource.Address</label>
+                        <span class="text-danger">*</span>
+                        <InputTextArea class="form-control" @bind-Value="Contact.Address" disabled="@disabledInput" />
+                        <ValidationMessage For="@(()=>Contact.Address)" />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>@Resource.Notes</label>
+                        <InputTextArea class="form-control" @bind-Value="Contact.Notes" disabled="@disabledInput" />
+                        <ValidationMessage For="@(()=>Contact.Notes)" />
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer text-muted">
+                <button type="submit" class="btn btn-primary" hidden="@(FeatureType.Equals(FeatureType.Details))">@_localizer[FeatureType.ToString()]</button>
+                <button type="button" class="btn btn-danger" onclick="@(()=>CloseForm())">@Resource.Cancel</button>
+            </div>
+        </EditForm>
+    </div>
+}

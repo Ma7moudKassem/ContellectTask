@@ -1,8 +1,19 @@
-﻿@using System.Net.Http
+﻿@using ContellectTask.WebUI.Shared;
+@using ContellectTask.WebUI.Helper;
+@using ContellectTask.Domain.Resources
+
+@using System.Net.Http
 @using System.Net.Http.Json
+
+@using Microsoft.JSInterop
+@using Microsoft.AspNetCore.Components.Web
 @using Microsoft.AspNetCore.Components.Forms
 @using Microsoft.AspNetCore.Components.Routing
-@using Microsoft.AspNetCore.Components.Web
-@using Microsoft.AspNetCore.Components.Web.Virtualization
 @using Microsoft.AspNetCore.Components.WebAssembly.Http
-@using Microsoft.JSInterop
+@using Microsoft.AspNetCore.Components.Web.Virtualization
+
+@using Blazored.FluentValidation
+
+@inject HttpClient _httpClient
+@inject InteropSettings _interopSettings
+@inject IStringLocalizer<Resource> _localizer

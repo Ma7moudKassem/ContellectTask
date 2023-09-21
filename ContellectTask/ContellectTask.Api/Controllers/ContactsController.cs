@@ -15,10 +15,19 @@
         #region Get EndPoints
         //GET api/v1/contacts?pageSize=0&pageIndex=5
         [HttpGet]
-        [ProducesResponseType(typeof(IEnumerable<Contact>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(PaginatedItemsViewModel<Contact>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetAllAsync([FromQuery] int pageSize = 5, [FromQuery] int pageIndex = 0)
         {
-            IEnumerable<Contact> contacts = await _contactRepository.GetContactAsync(pageSize, pageIndex);
+            long count = await _contactRepository.CountAsync();
+
+            IEnumerable<Contact> contacts =
+                await _contactRepository.GetContactAsync(pageSize, pageIndex);
+
+            //return Ok(new PaginatedItemsViewModel<Contact>(
+            //    pageIndex: pageIndex,
+            //    pageSize: pageSize,
+            //    count: count,
+            //    data: contacts));
 
             return Ok(contacts);
         }
@@ -101,10 +110,10 @@
         #endregion
 
         #region Delete EndPoints
-        //Delete api/v1/contacts
-        [HttpDelete]
+        //Delete api/v1/contacts/419c092d-844e-4d9e-991a-b7ea47d04f07
+        [HttpDelete("{id}")]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
-        public async Task<IActionResult> DeleteContactAsync(Guid id)
+        public async Task<IActionResult> DeleteContactAsync([FromRoute] Guid id)
         {
             try
             {
