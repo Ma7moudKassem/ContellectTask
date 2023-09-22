@@ -162,6 +162,12 @@
   <data name="Index" xml:space="preserve">
     <value>المسلسل</value>
   </data>
+  <data name="LogIn" xml:space="preserve">
+    <value>تسجيل الدخول</value>
+  </data>
+  <data name="LogOut" xml:space="preserve">
+    <value>تسجيل الخروج</value>
+  </data>
   <data name="MoreInfo" xml:space="preserve">
     <value>معلومات اخري</value>
   </data>
@@ -180,16 +186,25 @@
   <data name="Operations" xml:space="preserve">
     <value>العمليات</value>
   </data>
+  <data name="Password" xml:space="preserve">
+    <value>كلمة السر</value>
+  </data>
   <data name="Phone" xml:space="preserve">
     <value>الهاتف</value>
   </data>
   <data name="Previous" xml:space="preserve">
     <value>السابق</value>
   </data>
+  <data name="RememberMe" xml:space="preserve">
+    <value>تزكرني ؟</value>
+  </data>
   <data name="Requierd" xml:space="preserve">
     <value>هذا الحقل مطلوب</value>
   </data>
   <data name="Street" xml:space="preserve">
     <value>الشارع</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>اسم المستخدم</value>
   </data>
 </root>

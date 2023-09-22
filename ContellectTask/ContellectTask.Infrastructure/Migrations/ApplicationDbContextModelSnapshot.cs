@@ -176,6 +176,36 @@ namespace ContellectTask.Infrastructure.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "3ba62aaa-3c60-4b2c-8750-522ce4a70c3b",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "78ba8954-4284-47f3-81e6-60b613659748",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedUserName = "USER1",
+                            PasswordHash = "AQAAAAIAAYagAAAAEGVDnQbfgha+ydbXpbbTAvFDOxp6d0oFo18Ud5LSFhkz0SVNGE18h2mqpXuI9fRefg==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "2e4d1055-a02e-4c6b-88cc-867482324642",
+                            TwoFactorEnabled = false,
+                            UserName = "user1"
+                        },
+                        new
+                        {
+                            Id = "e1df21e3-dc35-42ad-b38e-46dc1c7ca818",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "1543755e-d4fb-468e-ab63-e5f45a94e953",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedUserName = "USER2",
+                            PasswordHash = "AQAAAAIAAYagAAAAEADqUbmGRKSsmBAtkrumvgE4Xi9S+Jn1h4PxFTAoV7wC67ohxcyJiw3B95c6gPHgIw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "00e3f467-e762-47b0-a7f7-c4771d8f7854",
+                            TwoFactorEnabled = false,
+                            UserName = "user2"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>

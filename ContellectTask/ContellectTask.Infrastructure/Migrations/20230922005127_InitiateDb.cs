@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace ContellectTask.Infrastructure.Migrations
 {
     /// <inheritdoc />
@@ -170,6 +172,15 @@ namespace ContellectTask.Infrastructure.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[,]
+                {
+                    { "3ba62aaa-3c60-4b2c-8750-522ce4a70c3b", 0, "78ba8954-4284-47f3-81e6-60b613659748", null, false, false, null, null, "USER1", "AQAAAAIAAYagAAAAEGVDnQbfgha+ydbXpbbTAvFDOxp6d0oFo18Ud5LSFhkz0SVNGE18h2mqpXuI9fRefg==", null, false, "2e4d1055-a02e-4c6b-88cc-867482324642", false, "user1" },
+                    { "e1df21e3-dc35-42ad-b38e-46dc1c7ca818", 0, "1543755e-d4fb-468e-ab63-e5f45a94e953", null, false, false, null, null, "USER2", "AQAAAAIAAYagAAAAEADqUbmGRKSsmBAtkrumvgE4Xi9S+Jn1h4PxFTAoV7wC67ohxcyJiw3B95c6gPHgIw==", null, false, "00e3f467-e762-47b0-a7f7-c4771d8f7854", false, "user2" }
                 });
 
             migrationBuilder.CreateIndex(

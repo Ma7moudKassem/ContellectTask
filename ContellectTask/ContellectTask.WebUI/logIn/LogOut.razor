@@ -1,0 +1,15 @@
+﻿@page "/logout"
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        await Logout();
+        _navigationManager.NavigateTo("/");
+    }
+    public async Task Logout()
+    {
+        await _localStorage.RemoveItemAsync("authToken");
+        _httpClient.DefaultRequestHeaders.Authorization = null;
+        ((AuthStateProvider)_authStateProvider).NotifyUserLogout();
+    }
+}

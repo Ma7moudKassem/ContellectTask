@@ -3,7 +3,6 @@
 public partial class MainLayout
 {
     [Inject] public IJSRuntime _jsRuntime { get; set; } = null!;
-    [Inject] public NavigationManager _navigationManager { get; set; } = null!;
 
     public bool RigthToLift { get => _interopSettings.GetCurrentLanguage() == "ar-EG"; set { } }
     public string Dir => RigthToLift ? "rtl" : "ltr";
@@ -34,4 +33,7 @@ public partial class MainLayout
             }
         }
     }
+
+    void LogOut() =>
+        _navigationManager.NavigateTo("/logout");
 }

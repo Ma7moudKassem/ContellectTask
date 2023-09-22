@@ -162,6 +162,12 @@
   <data name="Index" xml:space="preserve">
     <value>Index</value>
   </data>
+  <data name="LogIn" xml:space="preserve">
+    <value>Log In</value>
+  </data>
+  <data name="LogOut" xml:space="preserve">
+    <value>Log out</value>
+  </data>
   <data name="MoreInfo" xml:space="preserve">
     <value>More Informations</value>
   </data>
@@ -180,16 +186,25 @@
   <data name="Operations" xml:space="preserve">
     <value>Operations</value>
   </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
   <data name="Phone" xml:space="preserve">
     <value>Phone</value>
   </data>
   <data name="Previous" xml:space="preserve">
     <value>Previous</value>
   </data>
+  <data name="RememberMe" xml:space="preserve">
+    <value>Remember Me</value>
+  </data>
   <data name="Requierd" xml:space="preserve">
     <value>This field is required</value>
   </data>
   <data name="Street" xml:space="preserve">
     <value>Street</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>User Name</value>
   </data>
 </root>
