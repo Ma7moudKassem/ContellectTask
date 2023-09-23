@@ -2,8 +2,6 @@
 
 public partial class MainLayout
 {
-    [Inject] public IJSRuntime _jsRuntime { get; set; } = null!;
-
     bool RigthToLift { get => _interopSettings.GetCurrentLanguage() == "ar-EG"; set { } }
 
     string Dir => RigthToLift ? "rtl" : "ltr";

@@ -23,7 +23,6 @@ public class AuthService : IAuthService
         }
 
         JwtSecurityToken jwtSecurityToken = await CreateJwtToken(user);
-        IList<string> rolesList = await _userManager.GetRolesAsync(user);
 
         authModel.IsAuthenticated = true;
         authModel.Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
@@ -44,7 +43,7 @@ public class AuthService : IAuthService
                 new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim("uid", user.Id)
-            }
+        }
         .Union(userClaims)
         .Union(roleClaims);
 

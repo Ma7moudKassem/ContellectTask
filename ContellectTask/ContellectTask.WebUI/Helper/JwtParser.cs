@@ -13,6 +13,7 @@ public class JwtParser
         claims.AddRange(keyValuePairs.Select(kvp => new Claim(kvp.Key, kvp.Value.ToString())));
         return claims;
     }
+
     private static byte[] ParseBase64WithoutPadding(string base64)
     {
         switch (base64.Length % 4)

@@ -19,8 +19,8 @@ public partial class ContactsForm
         if (FeatureType.Equals(FeatureType.Delete))
             await _contactsHttpInterceptor.DeleteContactAsync(Contact.Id);
 
-        await OnContactObjectChange.InvokeAsync(Contact);
         await OnCancel.InvokeAsync(Contact);
+        await OnContactObjectChange.InvokeAsync(Contact);
     }
 
     async Task CloseForm() =>

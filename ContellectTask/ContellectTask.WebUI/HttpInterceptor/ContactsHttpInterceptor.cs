@@ -7,7 +7,8 @@ public class ContactsHttpInterceptor : IContactsHttpInterceptor
     readonly ILocalStorageService _localStorage;
     readonly IStringLocalizer<Resource> _localizer;
 
-    string baseUri = "api/v1/contacts";
+    static readonly string authType = "Bearer";
+    static readonly string baseUri = "api/v1/contacts";
     public ContactsHttpInterceptor(HttpClient httpClient, Toaster toaster, IStringLocalizer<Resource> localizer, ILocalStorageService localStorage)
     {
         _httpClient = httpClient;
@@ -23,7 +24,7 @@ public class ContactsHttpInterceptor : IContactsHttpInterceptor
 
         string token = await GetTokenAsync();
 
-        request.Headers.Add("Authorization", $"Bearer {token}");
+        AddTokenToHeaders(request, token);
 
         var response = await _httpClient.SendAsync(request);
 
@@ -50,7 +51,7 @@ public class ContactsHttpInterceptor : IContactsHttpInterceptor
 
         string token = await GetTokenAsync();
 
-        request.Headers.Add("Authorization", $"Bearer {token}");
+        AddTokenToHeaders(request, token);
 
         request.Content = new StringContent(JsonConvert.SerializeObject(contact), Encoding.UTF8, "application/json");
 
@@ -73,7 +74,7 @@ public class ContactsHttpInterceptor : IContactsHttpInterceptor
 
         string token = await GetTokenAsync();
 
-        request.Headers.Add("Authorization", $"Bearer {token}");
+        AddTokenToHeaders(request, token);
 
         request.Content = new StringContent(JsonConvert.SerializeObject(contact), Encoding.UTF8, "application/json");
 
@@ -97,7 +98,7 @@ public class ContactsHttpInterceptor : IContactsHttpInterceptor
 
         string token = await GetTokenAsync();
 
-        request.Headers.Add("Authorization", $"Bearer {token}");
+        AddTokenToHeaders(request, token);
 
         var response = await _httpClient.SendAsync(request);
 
@@ -115,4 +116,6 @@ public class ContactsHttpInterceptor : IContactsHttpInterceptor
     async Task<string> GetTokenAsync() =>
         await _localStorage.GetItemAsync<string>("authToken");
 
+    static void AddTokenToHeaders(HttpRequestMessage request, string token) =>
+        request.Headers.Add("Authorization", $"{authType} {token}");
 }

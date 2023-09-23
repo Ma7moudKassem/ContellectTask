@@ -20,10 +20,11 @@
 @using Blazored.FluentValidation
 
 @inject Toaster _toaster
+@inject IJSRuntime _jsRuntime
 @inject HttpClient _httpClient
 @inject InteropSettings _interopSettings
-@inject NavigationManager _navigationManager
 @inject ILocalStorageService _localStorage
+@inject NavigationManager _navigationManager
 @inject IStringLocalizer<Resource> _localizer
 @inject AuthenticationStateProvider _authStateProvider
 @inject IContactsHttpInterceptor _contactsHttpInterceptor

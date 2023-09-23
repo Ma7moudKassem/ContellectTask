@@ -19,6 +19,8 @@ public class ContactsController : ControllerBase
     [ProducesResponseType(typeof(PaginatedItemsViewModel<Contact>), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> GetAllAsync([FromQuery] int pageSize = 5, [FromQuery] int pageIndex = 1)
     {
+        _logger.LogInformation("Geting all contacts...");
+
         long count = await _contactRepository.CountAsync();
 
         IEnumerable<Contact> contacts = await _contactRepository.GetContactAsync(pageSize, pageIndex);
@@ -32,10 +34,12 @@ public class ContactsController : ControllerBase
 
     //GET api/v1/contacts/419c092d-844e-4d9e-991a-b7ea47d04f07
     [HttpGet("{id}")]
-    [ProducesResponseType((int)HttpStatusCode.NotFound)]
     [ProducesResponseType(typeof(Contact), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(string), (int)HttpStatusCode.NotFound)]
     public async Task<IActionResult> GetByIdAsync([FromRoute] Guid id)
     {
+        _logger.LogInformation("Getting contact with id: {id} ...", id);
+
         Contact? contact = await _contactRepository.GetContactAsync(id);
 
         if (contact is null)
@@ -48,8 +52,8 @@ public class ContactsController : ControllerBase
     #region Post EndPoints
     //POST api/v1/contacts
     [HttpPost]
-    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     [ProducesResponseType((int)HttpStatusCode.NoContent)]
+    [ProducesResponseType(typeof(ModelStateDictionary), (int)HttpStatusCode.BadRequest)]
     public async Task<IActionResult> PostContactAsync([FromBody] Contact contact)
     {
         try
@@ -81,8 +85,8 @@ public class ContactsController : ControllerBase
     #region Put EndPoints
     //PUT api/v1/contacts
     [HttpPut]
-    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     [ProducesResponseType((int)HttpStatusCode.NoContent)]
+    [ProducesResponseType(typeof(ModelStateDictionary), (int)HttpStatusCode.BadRequest)]
     public async Task<IActionResult> PutContactAsync(Contact contact)
     {
         try
@@ -92,6 +96,9 @@ public class ContactsController : ControllerBase
 
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
+
+            if (contact.CreatorUserName != User.Claims.First().Value)
+                throw new ContactDomainException("You can't edit this contact becouse you aren't creator");
 
             await _contactRepository.EditContactAsync(contact);
 
@@ -113,11 +120,20 @@ public class ContactsController : ControllerBase
     //Delete api/v1/contacts/419c092d-844e-4d9e-991a-b7ea47d04f07
     [HttpDelete("{id}")]
     [ProducesResponseType((int)HttpStatusCode.NoContent)]
+    [ProducesResponseType(typeof(string), (int)HttpStatusCode.NotFound)]
     public async Task<IActionResult> DeleteContactAsync([FromRoute] Guid id)
     {
         try
         {
             _logger.LogInformation("Deleting contact with id: {id}", id);
+
+            Contact? contact = await _contactRepository.GetContactAsync(id);
+
+            if (contact is null)
+                return NotFound($"Contact with id: {id} is not found");
+
+            if (contact?.CreatorUserName != User.Claims.First().Value)
+                throw new ContactDomainException("You can't delete this contact becouse you aren't creator");
 
             await _contactRepository.DeleteContactAsync(id);
 

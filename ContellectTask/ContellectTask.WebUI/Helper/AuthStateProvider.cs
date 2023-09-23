@@ -3,8 +3,8 @@
 public class AuthStateProvider : AuthenticationStateProvider
 {
     private readonly HttpClient _httpClient;
-    private readonly ILocalStorageService _localStorage;
     private readonly AuthenticationState _anonymous;
+    private readonly ILocalStorageService _localStorage;
     public AuthStateProvider(HttpClient httpClient, ILocalStorageService localStorage)
     {
         _httpClient = httpClient;

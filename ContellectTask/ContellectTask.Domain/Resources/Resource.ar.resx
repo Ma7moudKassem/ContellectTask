@@ -178,13 +178,13 @@
     <value>تسجيل الدخول</value>
   </data>
   <data name="LogInSuccessfully" xml:space="preserve">
-    <value>تم سجيل الدخول بنجاح</value>
+    <value>تم تسجيل الدخول بنجاح</value>
   </data>
   <data name="LogOut" xml:space="preserve">
     <value>تسجيل الخروج</value>
   </data>
   <data name="Logout Successfully" xml:space="preserve">
-    <value>تم سجيل الخروج بنجاح</value>
+    <value>تم تسجيل الخروج بنجاح</value>
   </data>
   <data name="MoreInfo" xml:space="preserve">
     <value>معلومات اخري</value>

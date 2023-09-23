@@ -11,7 +11,7 @@ public class ContactRepository : IContactRepository
 
     public async Task<IEnumerable<Contact>> GetContactAsync(int pageSize, int pageIndex) =>
         await _context.Contacts
-                      .OrderBy(x => x.CreationTimeDate)
+                      .OrderBy(x => x.CreationDateTime)
                       .Skip(pageSize * (pageIndex - 1))
                       .Take(pageSize)
                       .ToListAsync();

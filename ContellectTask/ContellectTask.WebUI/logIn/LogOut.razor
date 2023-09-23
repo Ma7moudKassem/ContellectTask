@@ -6,6 +6,7 @@
         await Logout();
         _navigationManager.NavigateTo("/");
     }
+
     public async Task Logout()
     {
         await _localStorage.RemoveItemAsync("authToken");

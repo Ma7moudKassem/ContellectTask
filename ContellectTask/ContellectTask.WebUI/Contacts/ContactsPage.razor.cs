@@ -58,6 +58,7 @@ public partial class ContactsPage
         if (featureType.Equals(FeatureType.Edit))
         {
             Contact oldContact = contacts.FirstOrDefault(x => x.Id == entity.Id) ?? new();
+           
             contacts.Remove(oldContact);
             contacts.Add(entity);
         }
@@ -110,7 +111,7 @@ public partial class ContactsPage
 
 
     #region HubMethods
-    public async Task Connect()
+    async Task Connect()
     {
         createContactHub = new HubConnectionBuilder()
             .WithUrl(_navigationManager.ToAbsoluteUri("/CreateContactHub")).Build();
@@ -153,7 +154,7 @@ public partial class ContactsPage
         }
     }
 
-    private async Task AddContactFromHub(string message)
+    async Task AddContactFromHub(string message)
     {
         Contact? contact = JsonConvert.DeserializeObject<Contact>(message);
 
@@ -168,7 +169,7 @@ public partial class ContactsPage
         await InvokeAsync(StateHasChanged);
     }
 
-    private async Task EditContactFromHub(string message)
+    async Task EditContactFromHub(string message)
     {
         Contact? contact = JsonConvert.DeserializeObject<Contact>(message);
 
@@ -178,7 +179,7 @@ public partial class ContactsPage
         await InvokeAsync(StateHasChanged);
     }
 
-    private async Task DeleteContactFromHub(string message)
+    async Task DeleteContactFromHub(string message)
     {
         Contact? contact = JsonConvert.DeserializeObject<Contact>(message);
 
