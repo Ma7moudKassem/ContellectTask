@@ -6,5 +6,6 @@ public class BaseEntityConfiguration<TEntity> : IEntityTypeConfiguration<TEntity
     public virtual void Configure(EntityTypeBuilder<TEntity> builder)
     {
         builder.HasKey(x => x.Id);
+        builder.Property(x => x.CreatorUserName).HasMaxLength(500);
     }
 }

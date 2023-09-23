@@ -9,26 +9,39 @@ public class ContactRepository : IContactRepository
     public async Task<Contact?> GetContactAsync(Guid id) =>
         await _context.Contacts.FirstOrDefaultAsync(x => x.Id == id);
 
-    public async Task<IEnumerable<Contact>> GetContactAsync(int pageSize = 5, int pageIndex = 0) =>
+    public async Task<IEnumerable<Contact>> GetContactAsync(int pageSize, int pageIndex) =>
         await _context.Contacts
-                      .OrderBy(x => x.Name)
-                      .Skip(pageSize * pageIndex)
+                      .OrderBy(x => x.CreationTimeDate)
+                      .Skip(pageSize * (pageIndex - 1))
                       .Take(pageSize)
                       .ToListAsync();
 
     public async Task AddContactAsync(Contact contact)
     {
-        await _context.Contacts.AddAsync(contact);
-        await _context.SaveChangesAsync();
+        try
+        {
+            await _context.Contacts.AddAsync(contact);
+            await _context.SaveChangesAsync();
+        }
+        catch (Exception ex)
+        {
+            throw new ContactDomainException(ex.Message);
+        }
     }
 
     public async Task EditContactAsync(Contact contact)
     {
         _ = await GetContactAsync(contact.Id)
             ?? throw new ContactNotFoundException(contact.Id);
-
-        _context.Contacts.Update(contact);
-        await _context.SaveChangesAsync();
+        try
+        {
+            _context.Contacts.Update(contact);
+            await _context.SaveChangesAsync();
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
+        }
     }
 
     public async Task DeleteContactAsync(Guid id)

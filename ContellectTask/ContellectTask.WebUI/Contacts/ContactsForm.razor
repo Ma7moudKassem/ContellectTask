@@ -22,14 +22,14 @@
                     <div class="form-group col-md-6">
                         <label>@Resource.Name</label>
                         <span class="text-danger">*</span>
-                        <InputText class="form-control" @bind-Value="Contact.Name" disabled="@disabledInput" />
+                        <InputText class="form-control" @bind-Value="Contact.Name" disabled="@DisabledInput" />
                         <ValidationMessage For="@(()=>Contact.Name)" />
                     </div>
 
                     <div class="form-group col-md-6">
                         <label>@Resource.Phone</label>
                         <span class="text-danger">*</span>
-                        <InputText class="form-control" @bind-Value="Contact.Phone" disabled="@disabledInput" />
+                        <InputText class="form-control" @bind-Value="Contact.Phone" disabled="@DisabledInput" />
                         <ValidationMessage For="@(()=>Contact.Phone)" />
                     </div>
                 </div>
@@ -37,12 +37,12 @@
                     <div class="form-group col-md-6">
                         <label>@Resource.Address</label>
                         <span class="text-danger">*</span>
-                        <InputTextArea class="form-control" @bind-Value="Contact.Address" disabled="@disabledInput" />
+                        <InputTextArea class="form-control" @bind-Value="Contact.Address" disabled="@DisabledInput" />
                         <ValidationMessage For="@(()=>Contact.Address)" />
                     </div>
                     <div class="form-group col-md-6">
                         <label>@Resource.Notes</label>
-                        <InputTextArea class="form-control" @bind-Value="Contact.Notes" disabled="@disabledInput" />
+                        <InputTextArea class="form-control" @bind-Value="Contact.Notes" disabled="@DisabledInput" />
                         <ValidationMessage For="@(()=>Contact.Notes)" />
                     </div>
                 </div>

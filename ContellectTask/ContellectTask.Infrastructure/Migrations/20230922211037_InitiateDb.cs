@@ -61,7 +61,8 @@ namespace ContellectTask.Infrastructure.Migrations
                     Phone = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     Address = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     Notes = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
-                    CreationTimeDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    CreationTimeDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatorUserName = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -179,8 +180,8 @@ namespace ContellectTask.Infrastructure.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "3ba62aaa-3c60-4b2c-8750-522ce4a70c3b", 0, "78ba8954-4284-47f3-81e6-60b613659748", null, false, false, null, null, "USER1", "AQAAAAIAAYagAAAAEGVDnQbfgha+ydbXpbbTAvFDOxp6d0oFo18Ud5LSFhkz0SVNGE18h2mqpXuI9fRefg==", null, false, "2e4d1055-a02e-4c6b-88cc-867482324642", false, "user1" },
-                    { "e1df21e3-dc35-42ad-b38e-46dc1c7ca818", 0, "1543755e-d4fb-468e-ab63-e5f45a94e953", null, false, false, null, null, "USER2", "AQAAAAIAAYagAAAAEADqUbmGRKSsmBAtkrumvgE4Xi9S+Jn1h4PxFTAoV7wC67ohxcyJiw3B95c6gPHgIw==", null, false, "00e3f467-e762-47b0-a7f7-c4771d8f7854", false, "user2" }
+                    { "42934bb7-8f61-4b11-945e-748f8991a675", 0, "b2cba42e-cabc-48c7-91bb-7d9ce9cb2cc6", null, false, false, null, null, "USER1", "AQAAAAIAAYagAAAAEAClWNaG7k7OIgW6eak+AXGK1Ve0MR1vf9DRwve0F3Hway6MlihzJrpEwfxb6koM3w==", null, false, "7f1ec25f-784b-4bf7-b233-9166e7ada8d2", false, "user1" },
+                    { "89b96209-fdab-4ad2-8fec-c79e0affef53", 0, "ca73ae5f-bf63-40f5-be5f-ed57a425bd86", null, false, false, null, null, "USER2", "AQAAAAIAAYagAAAAEKc2OLIPQc5yENVrtUL4oavlCN5P0PlgjDp/Kv4tpxu0PURUP2PsqUPDxx9mCLmPUg==", null, false, "d3954e6c-28e0-4e20-acf1-48abe5968fec", false, "user2" }
                 });
 
             migrationBuilder.CreateIndex(

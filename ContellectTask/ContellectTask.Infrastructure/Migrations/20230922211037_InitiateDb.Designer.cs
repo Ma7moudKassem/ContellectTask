@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ContellectTask.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230922005127_InitiateDb")]
+    [Migration("20230922211037_InitiateDb")]
     partial class InitiateDb
     {
         /// <inheritdoc />
@@ -38,6 +38,10 @@ namespace ContellectTask.Infrastructure.Migrations
 
                     b.Property<DateTime>("CreationTimeDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatorUserName")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -183,29 +187,29 @@ namespace ContellectTask.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "3ba62aaa-3c60-4b2c-8750-522ce4a70c3b",
+                            Id = "42934bb7-8f61-4b11-945e-748f8991a675",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "78ba8954-4284-47f3-81e6-60b613659748",
+                            ConcurrencyStamp = "b2cba42e-cabc-48c7-91bb-7d9ce9cb2cc6",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedUserName = "USER1",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGVDnQbfgha+ydbXpbbTAvFDOxp6d0oFo18Ud5LSFhkz0SVNGE18h2mqpXuI9fRefg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEAClWNaG7k7OIgW6eak+AXGK1Ve0MR1vf9DRwve0F3Hway6MlihzJrpEwfxb6koM3w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "2e4d1055-a02e-4c6b-88cc-867482324642",
+                            SecurityStamp = "7f1ec25f-784b-4bf7-b233-9166e7ada8d2",
                             TwoFactorEnabled = false,
                             UserName = "user1"
                         },
                         new
                         {
-                            Id = "e1df21e3-dc35-42ad-b38e-46dc1c7ca818",
+                            Id = "89b96209-fdab-4ad2-8fec-c79e0affef53",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1543755e-d4fb-468e-ab63-e5f45a94e953",
+                            ConcurrencyStamp = "ca73ae5f-bf63-40f5-be5f-ed57a425bd86",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedUserName = "USER2",
-                            PasswordHash = "AQAAAAIAAYagAAAAEADqUbmGRKSsmBAtkrumvgE4Xi9S+Jn1h4PxFTAoV7wC67ohxcyJiw3B95c6gPHgIw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKc2OLIPQc5yENVrtUL4oavlCN5P0PlgjDp/Kv4tpxu0PURUP2PsqUPDxx9mCLmPUg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "00e3f467-e762-47b0-a7f7-c4771d8f7854",
+                            SecurityStamp = "d3954e6c-28e0-4e20-acf1-48abe5968fec",
                             TwoFactorEnabled = false,
                             UserName = "user2"
                         });

@@ -11,13 +11,13 @@ public class AuthService : IAuthService
     }
     public async Task<AuthModel> LogIn(LogInModel logInModel)
     {
-        AuthModel authModel = new AuthModel();
+        AuthModel authModel = new();
 
         IdentityUser? user = await _userManager.FindByNameAsync(logInModel.UserName);
 
         if (user is null || !await _userManager.CheckPasswordAsync(user, logInModel.Password))
         {
-            authModel.Message = "User Name or Password is inCorrect!";
+            authModel.Message = "User Name or Password is InCorrect!";
 
             return authModel;
         }

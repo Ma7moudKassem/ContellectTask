@@ -9,7 +9,9 @@
     public async Task Logout()
     {
         await _localStorage.RemoveItemAsync("authToken");
+        await _localStorage.RemoveItemAsync("userName");
         _httpClient.DefaultRequestHeaders.Authorization = null;
         ((AuthStateProvider)_authStateProvider).NotifyUserLogout();
+        _toaster.ShowMessage(ToastType.Info, Resource.Logout_Successfully);
     }
 }

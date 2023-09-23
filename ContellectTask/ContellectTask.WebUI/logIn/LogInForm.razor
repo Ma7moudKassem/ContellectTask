@@ -13,12 +13,12 @@
                                 </div>
                                 <div class="form-group first">
                                     <label for="username">@Resource.UserName</label>
-                                    <InputText type="text" @bind-Value="@logInModel.UserName" class="form-control" placeholder="your-username" id="username" />
+                                    <InputText type="text" @bind-Value="@logInModel.UserName" class="form-control" placeholder="@Resource.UserName" id="username" />
                                     <ValidationMessage For="@(()=>logInModel.UserName)" />
                                 </div>
                                 <div class="form-group last mb-3">
                                     <label for="password">@Resource.Password</label>
-                                    <InputText type="password" @bind-Value="@logInModel.Password" class="form-control" placeholder="Your Password" id="password" />
+                                    <InputText type="password" @bind-Value="@logInModel.Password" class="form-control" placeholder="@Resource.Password" id="password" />
                                     <ValidationMessage For="@(()=>logInModel.Password)" />
                                 </div>
 

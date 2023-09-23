@@ -156,6 +156,18 @@
   <data name="Edit" xml:space="preserve">
     <value>Edit</value>
   </data>
+  <data name="ErrorEmailOrPassword" xml:space="preserve">
+    <value>Please ensure that your username or password is correct</value>
+  </data>
+  <data name="FailedAddMessage" xml:space="preserve">
+    <value>Failed to add this object</value>
+  </data>
+  <data name="FailedDeleteMessage" xml:space="preserve">
+    <value>Failed to Delete this object</value>
+  </data>
+  <data name="FailedEditMessage" xml:space="preserve">
+    <value>Failed to Edit this object</value>
+  </data>
   <data name="Home" xml:space="preserve">
     <value>Home</value>
   </data>
@@ -165,8 +177,14 @@
   <data name="LogIn" xml:space="preserve">
     <value>Log In</value>
   </data>
+  <data name="LogInSuccessfully" xml:space="preserve">
+    <value>Login Successfully</value>
+  </data>
   <data name="LogOut" xml:space="preserve">
     <value>Log out</value>
+  </data>
+  <data name="Logout Successfully" xml:space="preserve">
+    <value>Logout Successfully</value>
   </data>
   <data name="MoreInfo" xml:space="preserve">
     <value>More Informations</value>
@@ -189,6 +207,9 @@
   <data name="Password" xml:space="preserve">
     <value>Password</value>
   </data>
+  <data name="PasswordRequierd" xml:space="preserve">
+    <value>Enter password</value>
+  </data>
   <data name="Phone" xml:space="preserve">
     <value>Phone</value>
   </data>
@@ -204,7 +225,19 @@
   <data name="Street" xml:space="preserve">
     <value>Street</value>
   </data>
+  <data name="SuccessfullAddMessage" xml:space="preserve">
+    <value>This object has been added successfully</value>
+  </data>
+  <data name="SuccessfullDeleteMessage" xml:space="preserve">
+    <value>This object has been deleted successfully</value>
+  </data>
+  <data name="SuccessfullEditMessage" xml:space="preserve">
+    <value>This object has been edited successfully</value>
+  </data>
   <data name="UserName" xml:space="preserve">
     <value>User Name</value>
+  </data>
+  <data name="UserNameRequierd" xml:space="preserve">
+    <value>Enter user name</value>
   </data>
 </root>

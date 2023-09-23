@@ -14,9 +14,13 @@ public class AuthStateProvider : AuthenticationStateProvider
     public override async Task<AuthenticationState> GetAuthenticationStateAsync()
     {
         var token = await _localStorage.GetItemAsync<string>("authToken");
-        if (string.IsNullOrWhiteSpace(token))
+        var rememberMe = await _localStorage.GetItemAsync<bool>("rememberMe");
+
+        if (string.IsNullOrWhiteSpace(token) || !rememberMe)
             return _anonymous;
+
         _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token);
+
         return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity(JwtParser.ParseClaimsFromJwt(token), "jwtAuthType")));
     }
     public void NotifyUserAuthentication(string email)

@@ -2,8 +2,8 @@
 
 public enum FeatureType
 {
-    Add,
-    Delete,
-    Edit,
-    Details
+    Add = 0,
+    Delete = 1,
+    Edit = 2,
+    Details = 3
 }

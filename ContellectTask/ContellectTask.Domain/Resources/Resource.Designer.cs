@@ -178,6 +178,42 @@ namespace ContellectTask.Domain.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please ensure that your username or password is correct.
+        /// </summary>
+        public static string ErrorEmailOrPassword {
+            get {
+                return ResourceManager.GetString("ErrorEmailOrPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to add this object.
+        /// </summary>
+        public static string FailedAddMessage {
+            get {
+                return ResourceManager.GetString("FailedAddMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to Delete this object.
+        /// </summary>
+        public static string FailedDeleteMessage {
+            get {
+                return ResourceManager.GetString("FailedDeleteMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to Edit this object.
+        /// </summary>
+        public static string FailedEditMessage {
+            get {
+                return ResourceManager.GetString("FailedEditMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Home.
         /// </summary>
         public static string Home {
@@ -205,11 +241,29 @@ namespace ContellectTask.Domain.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Login Successfully.
+        /// </summary>
+        public static string LogInSuccessfully {
+            get {
+                return ResourceManager.GetString("LogInSuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Log out.
         /// </summary>
         public static string LogOut {
             get {
                 return ResourceManager.GetString("LogOut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Logout Successfully.
+        /// </summary>
+        public static string Logout_Successfully {
+            get {
+                return ResourceManager.GetString("Logout Successfully", resourceCulture);
             }
         }
         
@@ -277,6 +331,15 @@ namespace ContellectTask.Domain.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enter password.
+        /// </summary>
+        public static string PasswordRequierd {
+            get {
+                return ResourceManager.GetString("PasswordRequierd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Phone.
         /// </summary>
         public static string Phone {
@@ -322,11 +385,47 @@ namespace ContellectTask.Domain.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This object has been added successfully.
+        /// </summary>
+        public static string SuccessfullAddMessage {
+            get {
+                return ResourceManager.GetString("SuccessfullAddMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This object has been deleted successfully.
+        /// </summary>
+        public static string SuccessfullDeleteMessage {
+            get {
+                return ResourceManager.GetString("SuccessfullDeleteMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This object has been edited successfully.
+        /// </summary>
+        public static string SuccessfullEditMessage {
+            get {
+                return ResourceManager.GetString("SuccessfullEditMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to User Name.
         /// </summary>
         public static string UserName {
             get {
                 return ResourceManager.GetString("UserName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter user name.
+        /// </summary>
+        public static string UserNameRequierd {
+            get {
+                return ResourceManager.GetString("UserNameRequierd", resourceCulture);
             }
         }
     }

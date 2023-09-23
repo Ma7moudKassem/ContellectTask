@@ -156,6 +156,18 @@
   <data name="Edit" xml:space="preserve">
     <value>تعديل</value>
   </data>
+  <data name="ErrorEmailOrPassword" xml:space="preserve">
+    <value>برجاء التأكد من صحة اسم المستخدم او كلمة السر</value>
+  </data>
+  <data name="FailedAddMessage" xml:space="preserve">
+    <value>لم يتم اضافة هذا العنصر</value>
+  </data>
+  <data name="FailedDeleteMessage" xml:space="preserve">
+    <value>لم يتم ازالة هذا العنصر</value>
+  </data>
+  <data name="FailedEditMessage" xml:space="preserve">
+    <value>لم يتم تعديل هذا العنصر</value>
+  </data>
   <data name="Home" xml:space="preserve">
     <value>الرئيسية</value>
   </data>
@@ -165,8 +177,14 @@
   <data name="LogIn" xml:space="preserve">
     <value>تسجيل الدخول</value>
   </data>
+  <data name="LogInSuccessfully" xml:space="preserve">
+    <value>تم سجيل الدخول بنجاح</value>
+  </data>
   <data name="LogOut" xml:space="preserve">
     <value>تسجيل الخروج</value>
+  </data>
+  <data name="Logout Successfully" xml:space="preserve">
+    <value>تم سجيل الخروج بنجاح</value>
   </data>
   <data name="MoreInfo" xml:space="preserve">
     <value>معلومات اخري</value>
@@ -189,6 +207,9 @@
   <data name="Password" xml:space="preserve">
     <value>كلمة السر</value>
   </data>
+  <data name="PasswordRequierd" xml:space="preserve">
+    <value>برجاء ادخال كلمة السر</value>
+  </data>
   <data name="Phone" xml:space="preserve">
     <value>الهاتف</value>
   </data>
@@ -204,7 +225,19 @@
   <data name="Street" xml:space="preserve">
     <value>الشارع</value>
   </data>
+  <data name="SuccessfullAddMessage" xml:space="preserve">
+    <value>تم اضافة هذا العنصر بنجاح </value>
+  </data>
+  <data name="SuccessfullDeleteMessage" xml:space="preserve">
+    <value>تم حذف هذا العنصر بنجاح</value>
+  </data>
+  <data name="SuccessfullEditMessage" xml:space="preserve">
+    <value>تم تعديل هذا العنصر بنجاح</value>
+  </data>
   <data name="UserName" xml:space="preserve">
     <value>اسم المستخدم</value>
+  </data>
+  <data name="UserNameRequierd" xml:space="preserve">
+    <value>برجاء ادخال اسم المستخدم</value>
   </data>
 </root>

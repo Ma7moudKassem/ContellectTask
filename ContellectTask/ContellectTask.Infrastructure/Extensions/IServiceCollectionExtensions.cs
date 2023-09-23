@@ -2,27 +2,32 @@
 
 public static class IServiceCollectionExtensions
 {
-    public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration, IHostEnvironment environment)
     {
-        services.AddTransient<IAuthService, AuthService>();
-        services.AddTransient<IContactRepository, ContactRepository>();
+        services.AddSignalR();
 
-        services.AddApplicationDbContext(configuration);
+        services.AddScoped<IAuthService, AuthService>();
+        services.AddScoped<IContactRepository, ContactRepository>();
 
+        services.AddApplicationDbContext(configuration,environment);
         services.AddJwt(configuration);
 
         return services;
     }
 
-    public static IServiceCollection AddApplicationDbContext(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddApplicationDbContext(this IServiceCollection services, IConfiguration configuration, IHostEnvironment environment)
     {
-        string? connectionString = configuration.GetConnectionString("SqlConnection");
+        string? connectionString = environment.IsDevelopment() ? 
+            configuration.GetConnectionString("SqlConnection") :
+            "workstation id=ContellectTaskDb.mssql.somee.com;packet size=4096;user id=modykassem_SQLLogin_1;pwd=tm9j7he2hc;data source=ContellectTaskDb.mssql.somee.com;persist security info=False;initial catalog=ContellectTaskDb;TrustServerCertificate=True";
 
         ArgumentException.ThrowIfNullOrEmpty(nameof(connectionString));
 
         services.AddDbContext<ApplicationDbContext>(options =>
-        options.UseSqlServer(connectionString,
-        e => e.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName)));
+        {
+            options.UseSqlServer(connectionString, e => e.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName));
+            options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+        });
 
         return services;
     }

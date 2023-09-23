@@ -3,20 +3,21 @@
 public partial class ContactsForm
 {
     [Parameter] public Contact Contact { get; set; } = null!;
-    [Parameter] public FeatureType FeatureType { get; set; }
-    [Parameter] public EventCallback<Contact> OnContactObjectChange { get; set; }
     [Parameter] public EventCallback OnCancel { get; set; }
+    [Parameter] public EventCallback<Contact> OnContactObjectChange { get; set; }
     [Parameter] public bool ShowForm { get; set; }
+    [Parameter] public FeatureType FeatureType { get; set; }
 
-    bool disabledInput => FeatureType.Equals(FeatureType.Details) || FeatureType.Equals(FeatureType.Delete);
+    bool DisabledInput { get => FeatureType.Equals(FeatureType.Details) || FeatureType.Equals(FeatureType.Delete); set { } }
+
     async Task OnValidSubmit()
     {
         if (FeatureType.Equals(FeatureType.Add))
-            await _httpClient.PostAsJsonAsync("api/v1/Contacts", Contact);
+            await _contactsHttpInterceptor.PostContactAsync(Contact);
         if (FeatureType.Equals(FeatureType.Edit))
-            await _httpClient.PutAsJsonAsync("api/v1/Contacts", Contact);
+            await _contactsHttpInterceptor.EditContactAsync(Contact);
         if (FeatureType.Equals(FeatureType.Delete))
-            await _httpClient.DeleteAsync($"api/v1/Contacts/{Contact.Id}");
+            await _contactsHttpInterceptor.DeleteContactAsync(Contact.Id);
 
         await OnContactObjectChange.InvokeAsync(Contact);
         await OnCancel.InvokeAsync(Contact);

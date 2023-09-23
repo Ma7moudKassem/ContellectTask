@@ -4,22 +4,25 @@ public partial class MainLayout
 {
     [Inject] public IJSRuntime _jsRuntime { get; set; } = null!;
 
-    public bool RigthToLift { get => _interopSettings.GetCurrentLanguage() == "ar-EG"; set { } }
-    public string Dir => RigthToLift ? "rtl" : "ltr";
+    bool RigthToLift { get => _interopSettings.GetCurrentLanguage() == "ar-EG"; set { } }
 
-    public void ChangeLanguage()
+    string Dir => RigthToLift ? "rtl" : "ltr";
+    ToastsPlacement ToasterPalcement => RigthToLift ? ToastsPlacement.TopLeft : ToastsPlacement.TopRight;
+
+    void ChangeLanguage()
     {
         Culture = !RigthToLift ? new CultureInfo("ar-EG") : new CultureInfo("en-US");
 
         StateHasChanged();
     }
 
-    private CultureInfo[] cultures = new[]
+    CultureInfo[] cultures = new[]
     {
             new CultureInfo("ar-EG"),
             new CultureInfo("en-US"),
     };
-    private CultureInfo Culture
+
+    CultureInfo Culture
     {
         get => CultureInfo.CurrentCulture;
         set
