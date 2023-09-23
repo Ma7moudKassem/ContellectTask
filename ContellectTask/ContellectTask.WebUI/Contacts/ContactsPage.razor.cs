@@ -44,7 +44,7 @@ public partial class ContactsPage
         if (featureType.Equals(FeatureType.Add))
         {
             if (contacts.Count < 5)
-                contacts.Add(entity);
+                await OnPaginationChanged(metaData.CurrentPage);
             else
                 await OnPaginationChanged(metaData.CurrentPage + 1);
         }

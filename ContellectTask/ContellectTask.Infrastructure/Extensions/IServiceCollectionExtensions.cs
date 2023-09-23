@@ -19,7 +19,7 @@ public static class IServiceCollectionExtensions
     {
         string? connectionString = environment.IsDevelopment() ? 
             configuration.GetConnectionString("SqlConnection") :
-            "workstation id=ContellectTaskDb.mssql.somee.com;packet size=4096;user id=modykassem_SQLLogin_1;pwd=tm9j7he2hc;data source=ContellectTaskDb.mssql.somee.com;persist security info=False;initial catalog=ContellectTaskDb;TrustServerCertificate=True";
+            "Data Source=SQL5111.site4now.net;Initial Catalog=db_a9f4d4_contellectdb;User Id=db_a9f4d4_contellectdb_admin;Password=contellectdb12";
 
         ArgumentException.ThrowIfNullOrEmpty(nameof(connectionString));
 
