@@ -1,5 +1,3 @@
-using Microsoft.AspNetCore.Http;
-
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
 builder.RootComponents.Add<App>("#app");

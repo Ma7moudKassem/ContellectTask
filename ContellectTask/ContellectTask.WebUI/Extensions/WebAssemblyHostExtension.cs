@@ -9,9 +9,7 @@ public static class WebAssemblyHostExtension
         var result = await js.InvokeAsync<string>("blazorCulture.get");
 
         if (result is not null)
-        {
             culture = new CultureInfo(result);
-        }
         else
         {
             culture = new CultureInfo("ar-EG");
