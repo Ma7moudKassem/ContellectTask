@@ -24,10 +24,6 @@ public partial class LogInForm
         else
         {
             await _localStorage.SetItemAsync("authToken", authModel.Token);
-            await _localStorage.SetItemAsync("userName", authModel.UserName);
-
-            if (logInModel.RememberMe)
-                await _localStorage.SetItemAsync("rememberMe", true);
 
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", authModel.Token);
 

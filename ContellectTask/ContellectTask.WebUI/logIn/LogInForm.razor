@@ -21,14 +21,6 @@
                                     <InputText type="password" @bind-Value="@logInModel.Password" class="form-control" placeholder="@Resource.Password" id="password" />
                                     <ValidationMessage For="@(()=>logInModel.Password)" />
                                 </div>
-
-                                <div class="d-sm-flex mb-5 align-items-center">
-                                    <label class="control control--checkbox mb-3 mb-sm-0">
-                                        <span class="caption">@Resource.RememberMe</span>
-                                        <InputCheckbox type="checkbox" @bind-Value="@logInModel.RememberMe" />
-                                        <div class="control__indicator"></div>
-                                    </label>
-                                </div>
                                 <button type="submit" class="btn btn-danger">@Resource.LogIn</button>
                             </div>
                         </div>
