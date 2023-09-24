@@ -3,7 +3,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
-builder.Services.AddInfrastructureServices(builder.Configuration,builder.Environment);
+builder.Services.AddDomainServices();
+builder.Services.AddInfrastructureServices(builder.Configuration, builder.Environment);
 
 var app = builder.Build();
 

@@ -4,11 +4,11 @@ public static class WebApplicationExtensions
 {
     public static WebApplication UseInfrastructureLayer(this WebApplication app)
     {
+        app.DatabaseMigrate();
+
         app.MapHub<NotificationsHub>("/CreateContactHub");
         app.MapHub<NotificationsHub>("/UpdateContactHub");
         app.MapHub<NotificationsHub>("/DeleteContactHub");
-
-        app.DatabaseMigrate();
 
         return app;
     }

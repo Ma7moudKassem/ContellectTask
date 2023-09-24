@@ -2,7 +2,7 @@
 
 public class ContactRepository : IContactRepository
 {
-    private readonly ApplicationDbContext _context;
+    readonly ApplicationDbContext _context;
     public ContactRepository(ApplicationDbContext context) =>
         _context = context;
 

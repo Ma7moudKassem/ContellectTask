@@ -216,6 +216,9 @@
   <data name="Phone" xml:space="preserve">
     <value>Phone</value>
   </data>
+  <data name="PhoneFormat" xml:space="preserve">
+    <value>Make sure that you write the phone number correctly</value>
+  </data>
   <data name="Previous" xml:space="preserve">
     <value>Previous</value>
   </data>

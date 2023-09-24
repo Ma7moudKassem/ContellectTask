@@ -5,12 +5,14 @@
 [ApiController]
 public class ContactsController : ControllerBase
 {
-    private readonly IContactRepository _contactRepository;
-    private readonly ILogger<ContactsController> _logger;
-    public ContactsController(IContactRepository contactRepository, ILogger<ContactsController> logger)
+    readonly IContactRepository _repository;
+    readonly ILogger<ContactsController> _logger;
+    readonly IValidator<Contact> _validator;
+    public ContactsController(IContactRepository repository, ILogger<ContactsController> logger, IValidator<Contact> validator)
     {
-        _contactRepository = contactRepository;
+        _repository = repository;
         _logger = logger;
+        _validator = validator;
     }
 
     #region Get EndPoints
@@ -19,11 +21,11 @@ public class ContactsController : ControllerBase
     [ProducesResponseType(typeof(PaginatedItemsViewModel<Contact>), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> GetAllAsync([FromQuery] int pageSize = 5, [FromQuery] int pageIndex = 1)
     {
-        _logger.LogInformation("Geting all contacts...");
+        _logger.LogInformation("Getting all contacts...");
 
-        long count = await _contactRepository.CountAsync();
+        long count = await _repository.CountAsync();
 
-        IEnumerable<Contact> contacts = await _contactRepository.GetContactAsync(pageSize, pageIndex);
+        IEnumerable<Contact> contacts = await _repository.GetContactAsync(pageSize, pageIndex);
 
         PaginatedItemsViewModel<Contact> contactsPaginated = new(items: contacts, count: count, pageNumber: pageIndex, pageSize: pageSize);
 
@@ -40,7 +42,7 @@ public class ContactsController : ControllerBase
     {
         _logger.LogInformation("Getting contact with id: {id} ...", id);
 
-        Contact? contact = await _contactRepository.GetContactAsync(id);
+        Contact? contact = await _repository.GetContactAsync(id);
 
         if (contact is null)
             return NotFound($"Contact with id: {id} is not found");
@@ -53,7 +55,7 @@ public class ContactsController : ControllerBase
     //POST api/v1/contacts
     [HttpPost]
     [ProducesResponseType((int)HttpStatusCode.NoContent)]
-    [ProducesResponseType(typeof(ModelStateDictionary), (int)HttpStatusCode.BadRequest)]
+    [ProducesResponseType(typeof(List<ValidationFailure>), (int)HttpStatusCode.BadRequest)]
     public async Task<IActionResult> PostContactAsync([FromBody] Contact contact)
     {
         try
@@ -63,10 +65,12 @@ public class ContactsController : ControllerBase
 
             contact.CreatorUserName = User?.Claims.First().Value;
 
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+            ValidationResult result = await _validator.ValidateAsync(contact);
 
-            await _contactRepository.AddContactAsync(contact);
+            if (!result.IsValid)
+                return BadRequest(result.Errors);
+
+            await _repository.AddContactAsync(contact);
 
             return NoContent();
         }
@@ -87,21 +91,25 @@ public class ContactsController : ControllerBase
     [HttpPut]
     [ProducesResponseType((int)HttpStatusCode.NoContent)]
     [ProducesResponseType(typeof(string), (int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType(typeof(ModelStateDictionary), (int)HttpStatusCode.BadRequest)]
+    [ProducesResponseType(typeof(List<ValidationFailure>), (int)HttpStatusCode.BadRequest)]
     public async Task<IActionResult> PutContactAsync(Contact contact)
     {
-        _logger.LogInformation("Updating contact with id: {id} and name: {name}",
-            contact.Id, contact.Name);
-
         try
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+            _logger.LogInformation("Updating contact with id: {id} and name: {name}",
+                contact.Id, contact.Name);
 
-            if (contact.CreatorUserName != User.Claims.First().Value)
-                return BadRequest("You can't edit this contact becouse you aren't creator");
+            ValidationResult result = await _validator.ValidateAsync(contact);
 
-            await _contactRepository.EditContactAsync(contact);
+            if (!result.IsValid)
+                return BadRequest(result.Errors);
+
+            Contact? contactFromDb = await _repository.GetContactAsync(contact.Id);
+
+            if (contactFromDb?.CreatorUserName != User.Claims.First().Value)
+                return BadRequest("You can't edit this contact because you aren't creator");
+
+            await _repository.EditContactAsync(contact);
 
             return NoContent();
         }
@@ -125,19 +133,19 @@ public class ContactsController : ControllerBase
     [ProducesResponseType(typeof(string), (int)HttpStatusCode.BadRequest)]
     public async Task<IActionResult> DeleteContactAsync([FromRoute] Guid id)
     {
-        _logger.LogInformation("Deleting contact with id: {id}", id);
-
         try
         {
-            Contact? contact = await _contactRepository.GetContactAsync(id);
+            _logger.LogInformation("Deleting contact with id: {id}", id);
+
+            Contact? contact = await _repository.GetContactAsync(id);
 
             if (contact is null)
                 return NotFound($"Contact with id: {id} is not found");
 
             if (contact?.CreatorUserName != User.Claims.First().Value)
-                return BadRequest("You can't delete this contact becouse you aren't creator");
+                return BadRequest("You can't delete this contact because you aren't creator");
 
-            await _contactRepository.DeleteContactAsync(id);
+            await _repository.DeleteContactAsync(id);
 
             return NoContent();
         }

@@ -2,14 +2,15 @@
 
 public class AuthService : IAuthService
 {
-    private readonly JWT _jwt;
-    private readonly UserManager<IdentityUser> _userManager;
+    readonly JWT _jwt;
+    readonly UserManager<IdentityUser> _userManager;
     public AuthService(IOptions<JWT> jwt, UserManager<IdentityUser> userManager)
     {
         _jwt = jwt.Value;
         _userManager = userManager;
     }
 
+    #region LogIn
     public async Task<AuthModel> LogIn(LogInModel logInModel)
     {
         AuthModel authModel = new();
@@ -32,7 +33,9 @@ public class AuthService : IAuthService
 
         return authModel;
     }
+    #endregion
 
+    #region Generate JWT
     private async Task<JwtSecurityToken> CreateJwtToken(IdentityUser user)
     {
         IList<Claim> userClaims = await _userManager.GetClaimsAsync(user);
@@ -60,4 +63,5 @@ public class AuthService : IAuthService
 
         return jwtSecurityToken;
     }
+    #endregion
 }

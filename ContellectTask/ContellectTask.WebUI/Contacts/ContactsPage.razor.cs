@@ -36,8 +36,9 @@ public partial class ContactsPage
 
             await SortContactsByIndex();
             await ConnectHubs();
-            await base.OnAfterRenderAsync(firstRender);
         }
+
+        await base.OnAfterRenderAsync(firstRender);
     }
 
     async Task OnContactObjectChange(Contact entity)
@@ -64,11 +65,11 @@ public partial class ContactsPage
             contacts.Add(entity);
         }
 
+        await SortContactsByIndex();
+
         string message = JsonConvert.SerializeObject(contact);
 
         await SendAsync(message);
-
-        await SortContactsByIndex();
     }
 
     async Task OnCancel()
@@ -78,9 +79,9 @@ public partial class ContactsPage
         await InvokeAsync(StateHasChanged);
     }
 
-    async Task ShowForm(FeatureType formFeatureType, Contact entity)
+    async Task ShowForm(FeatureType featureType, Contact entity)
     {
-        featureType = formFeatureType;
+        this.featureType = featureType;
 
         contact = entity;
 
@@ -156,11 +157,9 @@ public partial class ContactsPage
 
     async Task AddContactFromHub(string message)
     {
-        Contact? contact = JsonConvert.DeserializeObject<Contact>(message);
-
-        if (contact is not null)
+        if (!string.IsNullOrEmpty(message))
         {
-            if (contacts.Count < 5)
+            if (contacts.Count <= 5)
                 await OnPaginationChanged(metaData.CurrentPage);
             else
                 await OnPaginationChanged(metaData.CurrentPage + 1);
@@ -169,17 +168,13 @@ public partial class ContactsPage
 
     async Task EditContactFromHub(string message)
     {
-        Contact? contact = JsonConvert.DeserializeObject<Contact>(message);
-
-        if (contact is not null)
+        if (!string.IsNullOrEmpty(message))
             await OnPaginationChanged(metaData.CurrentPage);
     }
 
     async Task DeleteContactFromHub(string message)
     {
-        Contact? contact = JsonConvert.DeserializeObject<Contact>(message);
-
-        if (contact is not null)
+        if (!string.IsNullOrEmpty(message))
         {
             if (contacts.Count == 0 && metaData.TotalPages > 1)
                 await OnPaginationChanged(metaData.CurrentPage - 1);

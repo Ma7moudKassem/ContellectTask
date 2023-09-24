@@ -11,7 +11,8 @@ builder.Services.AddSingleton<InteropSettings>();
 builder.Services.AddScoped<IContactsHttpInterceptor, ContactsHttpInterceptor>();
 builder.Services.AddScoped<AuthenticationStateProvider, AuthStateProvider>();
 
-builder.Services.AddLocalization();
+builder.Services.AddDomainServices();
+
 builder.Services.AddBlazorBootstrap();
 builder.Services.AddAuthorizationCore();
 builder.Services.AddBlazoredLocalStorage();

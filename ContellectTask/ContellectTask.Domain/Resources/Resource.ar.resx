@@ -216,6 +216,9 @@
   <data name="Phone" xml:space="preserve">
     <value>الهاتف</value>
   </data>
+  <data name="PhoneFormat" xml:space="preserve">
+    <value>برجاء التأكد من كتابة رقم الهاتف بصيغة صحيحة</value>
+  </data>
   <data name="Previous" xml:space="preserve">
     <value>السابق</value>
   </data>

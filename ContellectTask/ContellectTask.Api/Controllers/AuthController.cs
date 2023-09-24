@@ -6,29 +6,33 @@ public class AuthController : ControllerBase
 {
     readonly IAuthService _services;
     readonly ILogger<AuthController> _logger;
-    public AuthController(IAuthService services, ILogger<AuthController> logger)
+    readonly IValidator<LogInModel> _validator;
+    public AuthController(IAuthService services, ILogger<AuthController> logger, IValidator<LogInModel> validator)
     {
         _services = services;
         _logger = logger;
+        _validator = validator;
     }
 
     //POST api/auth/v1/login
     [HttpPost("Login")]
     [ProducesResponseType(typeof(AuthModel), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(string), (int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType(typeof(ModelStateDictionary), (int)HttpStatusCode.BadRequest)]
+    [ProducesResponseType(typeof(List<ValidationFailure>), (int)HttpStatusCode.BadRequest)]
     public async Task<IActionResult> LogIn([FromBody] LogInModel logInModel)
     {
         _logger.LogInformation("Login by {userName}", logInModel.UserName);
 
-        if (!ModelState.IsValid)
-            return BadRequest(ModelState);
+        ValidationResult result = await _validator.ValidateAsync(logInModel);
 
-        AuthModel result = await _services.LogIn(logInModel);
+        if (!result.IsValid)
+            return BadRequest(result.Errors);
 
-        if (!result.IsAuthenticated)
-            return BadRequest(result.Message);
+        AuthModel auth = await _services.LogIn(logInModel);
 
-        return Ok(result);
+        if (!auth.IsAuthenticated)
+            return BadRequest(auth.Message);
+
+        return Ok(auth);
     }
 }

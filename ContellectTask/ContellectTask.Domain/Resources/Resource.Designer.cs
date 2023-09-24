@@ -358,6 +358,15 @@ namespace ContellectTask.Domain.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Make sure that you write the phone number correctly.
+        /// </summary>
+        public static string PhoneFormat {
+            get {
+                return ResourceManager.GetString("PhoneFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Previous.
         /// </summary>
         public static string Previous {
