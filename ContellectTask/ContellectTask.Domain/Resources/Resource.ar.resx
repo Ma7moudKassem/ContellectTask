@@ -198,6 +198,9 @@
   <data name="Next" xml:space="preserve">
     <value>التالي</value>
   </data>
+  <data name="NoContactsToDisplay" xml:space="preserve">
+    <value>لا يوجد جهات اتصال لعرضها</value>
+  </data>
   <data name="Notes" xml:space="preserve">
     <value>الملاحظات</value>
   </data>

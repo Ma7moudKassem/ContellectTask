@@ -14,7 +14,7 @@ public class ContactsController : ControllerBase
     }
 
     #region Get EndPoints
-    //GET api/v1/contacts?pageSize=0&pageIndex=5
+    //GET api/v1/contacts?pageSize=5&pageIndex=1
     [HttpGet]
     [ProducesResponseType(typeof(PaginatedItemsViewModel<Contact>), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> GetAllAsync([FromQuery] int pageSize = 5, [FromQuery] int pageIndex = 1)
@@ -86,19 +86,20 @@ public class ContactsController : ControllerBase
     //PUT api/v1/contacts
     [HttpPut]
     [ProducesResponseType((int)HttpStatusCode.NoContent)]
+    [ProducesResponseType(typeof(string), (int)HttpStatusCode.BadRequest)]
     [ProducesResponseType(typeof(ModelStateDictionary), (int)HttpStatusCode.BadRequest)]
     public async Task<IActionResult> PutContactAsync(Contact contact)
     {
+        _logger.LogInformation("Updating contact with id: {id} and name: {name}",
+            contact.Id, contact.Name);
+
         try
         {
-            _logger.LogInformation("Updating contact with id: {id} and name: {name}",
-                contact.Id, contact.Name);
-
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             if (contact.CreatorUserName != User.Claims.First().Value)
-                throw new ContactDomainException("You can't edit this contact becouse you aren't creator");
+                return BadRequest("You can't edit this contact becouse you aren't creator");
 
             await _contactRepository.EditContactAsync(contact);
 
@@ -121,19 +122,20 @@ public class ContactsController : ControllerBase
     [HttpDelete("{id}")]
     [ProducesResponseType((int)HttpStatusCode.NoContent)]
     [ProducesResponseType(typeof(string), (int)HttpStatusCode.NotFound)]
+    [ProducesResponseType(typeof(string), (int)HttpStatusCode.BadRequest)]
     public async Task<IActionResult> DeleteContactAsync([FromRoute] Guid id)
     {
+        _logger.LogInformation("Deleting contact with id: {id}", id);
+
         try
         {
-            _logger.LogInformation("Deleting contact with id: {id}", id);
-
             Contact? contact = await _contactRepository.GetContactAsync(id);
 
             if (contact is null)
                 return NotFound($"Contact with id: {id} is not found");
 
             if (contact?.CreatorUserName != User.Claims.First().Value)
-                throw new ContactDomainException("You can't delete this contact becouse you aren't creator");
+                return BadRequest("You can't delete this contact becouse you aren't creator");
 
             await _contactRepository.DeleteContactAsync(id);
 

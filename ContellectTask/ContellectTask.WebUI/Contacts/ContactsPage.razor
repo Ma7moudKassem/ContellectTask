@@ -8,7 +8,6 @@
 
 @if (!showForm)
 {
-
     <div class="col mt-4 mb-4">
         <button type="button" class="btn btn-primary" onclick="@(()=>ShowForm(FeatureType.Add,new Contact()))">@_localizer[Resource.New]</button>
     </div>
@@ -21,13 +20,13 @@
           TItem="Contact"
           AllowRowClick="false"
           AllowFiltering="true"
+          EmptyText="@Resource.NoContactsToDisplay"
           Responsive="true">
 
         <GridColumn TItem="Contact" HeaderText="@Resource.Index" PropertyName="Index"> @context.Index</GridColumn>
         <GridColumn TItem="Contact" HeaderText="@Resource.Name" PropertyName="Name">@context.Name</GridColumn>
         <GridColumn TItem="Contact" HeaderText="@Resource.Phone" PropertyName="Phone"> @context.Phone </GridColumn>
         <GridColumn TItem="Contact" HeaderText="@Resource.Address" PropertyName="Address">@context.Address</GridColumn>
-
         <GridColumn TItem="Contact" HeaderText="@Resource.Operations" PropertyName="Address">
             @if (currentUser == context.CreatorUserName)
             {

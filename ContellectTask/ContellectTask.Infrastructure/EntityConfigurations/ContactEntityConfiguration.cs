@@ -11,7 +11,7 @@ public class ContactEntityConfiguration : BaseEntityConfiguration<Contact>
                .HasMaxLength(200);
 
         builder.HasIndex(x => x.Name)
-                .IsUnique(true);
+               .IsUnique(true);
 
         builder.Property(x => x.Phone)
                .IsRequired(true)

@@ -9,7 +9,7 @@ public static class IServiceCollectionExtensions
         services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<IContactRepository, ContactRepository>();
 
-        services.AddApplicationDbContext(configuration,environment);
+        services.AddApplicationDbContext(configuration, environment);
         services.AddJwt(configuration);
 
         return services;
@@ -17,7 +17,7 @@ public static class IServiceCollectionExtensions
 
     public static IServiceCollection AddApplicationDbContext(this IServiceCollection services, IConfiguration configuration, IHostEnvironment environment)
     {
-        string? connectionString = environment.IsDevelopment() ? 
+        string? connectionString = environment.IsDevelopment() ?
             configuration.GetConnectionString("SqlConnection") :
             "Data Source=SQL5111.site4now.net;Initial Catalog=db_a9f4d4_contellectdb;User Id=db_a9f4d4_contellectdb_admin;Password=contellectdb12";
 
@@ -34,7 +34,6 @@ public static class IServiceCollectionExtensions
 
     public static IServiceCollection AddJwt(this IServiceCollection services, IConfiguration configuration)
     {
-
         services.Configure<JWT>(configuration.GetSection("JWT"));
 
         services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();

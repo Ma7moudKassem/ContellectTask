@@ -198,6 +198,9 @@
   <data name="Next" xml:space="preserve">
     <value>Next</value>
   </data>
+  <data name="NoContactsToDisplay" xml:space="preserve">
+    <value>No contacts to display</value>
+  </data>
   <data name="Notes" xml:space="preserve">
     <value>Notes</value>
   </data>

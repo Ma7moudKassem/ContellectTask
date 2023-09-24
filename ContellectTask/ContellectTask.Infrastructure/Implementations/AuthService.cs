@@ -9,6 +9,7 @@ public class AuthService : IAuthService
         _jwt = jwt.Value;
         _userManager = userManager;
     }
+
     public async Task<AuthModel> LogIn(LogInModel logInModel)
     {
         AuthModel authModel = new();

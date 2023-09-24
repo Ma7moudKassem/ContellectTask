@@ -304,6 +304,15 @@ namespace ContellectTask.Domain.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No contacts to display.
+        /// </summary>
+        public static string NoContactsToDisplay {
+            get {
+                return ResourceManager.GetString("NoContactsToDisplay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Notes.
         /// </summary>
         public static string Notes {

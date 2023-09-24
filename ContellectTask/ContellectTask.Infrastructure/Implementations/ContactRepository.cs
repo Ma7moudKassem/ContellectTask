@@ -40,7 +40,7 @@ public class ContactRepository : IContactRepository
         }
         catch (Exception ex)
         {
-            throw new Exception(ex.Message);
+            throw new ContactDomainException(ex.Message);
         }
     }
 
@@ -49,8 +49,15 @@ public class ContactRepository : IContactRepository
         Contact? contact = await GetContactAsync(id)
             ?? throw new ContactNotFoundException(id);
 
-        _context.Contacts.Remove(contact);
-        await _context.SaveChangesAsync();
+        try
+        {
+            _context.Contacts.Remove(contact);
+            await _context.SaveChangesAsync();
+        }
+        catch (Exception ex)
+        {
+            throw new ContactDomainException(ex.Message);
+        }
     }
 
     public async Task<long> CountAsync() =>

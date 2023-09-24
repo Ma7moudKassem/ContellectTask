@@ -8,7 +8,7 @@ public partial class ContactsForm
     [Parameter] public bool ShowForm { get; set; }
     [Parameter] public FeatureType FeatureType { get; set; }
 
-    bool DisabledInput { get => FeatureType.Equals(FeatureType.Details) || FeatureType.Equals(FeatureType.Delete); set { } }
+    bool DisabledInput => FeatureType.Equals(FeatureType.Details) || FeatureType.Equals(FeatureType.Delete);
 
     async Task OnValidSubmit()
     {

@@ -4,6 +4,7 @@ public partial class ContactsPage
 {
     bool showForm = false;
     bool isConnected = false;
+    string currentUser = string.Empty;
     FeatureType featureType = FeatureType.Add;
 
     Contact contact = new();
@@ -14,7 +15,6 @@ public partial class ContactsPage
     HubConnection? updateContactHub;
     HubConnection? deleteContactHub;
 
-    string currentUser = string.Empty;
     protected override async Task OnInitializedAsync()
     {
         var authState = await _authStateProvider.GetAuthenticationStateAsync();
@@ -23,6 +23,7 @@ public partial class ContactsPage
 
         await base.OnInitializedAsync();
     }
+
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
@@ -34,7 +35,7 @@ public partial class ContactsPage
             metaData = responce.MetaData ?? new();
 
             await SortContactsByIndex();
-            await Connect();
+            await ConnectHubs();
             await base.OnAfterRenderAsync(firstRender);
         }
     }
@@ -58,7 +59,7 @@ public partial class ContactsPage
         if (featureType.Equals(FeatureType.Edit))
         {
             Contact oldContact = contacts.FirstOrDefault(x => x.Id == entity.Id) ?? new();
-           
+
             contacts.Remove(oldContact);
             contacts.Add(entity);
         }
@@ -109,9 +110,8 @@ public partial class ContactsPage
         await SortContactsByIndex();
     }
 
-
     #region HubMethods
-    async Task Connect()
+    async Task ConnectHubs()
     {
         createContactHub = new HubConnectionBuilder()
             .WithUrl(_navigationManager.ToAbsoluteUri("/CreateContactHub")).Build();
@@ -165,8 +165,6 @@ public partial class ContactsPage
             else
                 await OnPaginationChanged(metaData.CurrentPage + 1);
         }
-
-        await InvokeAsync(StateHasChanged);
     }
 
     async Task EditContactFromHub(string message)
@@ -175,8 +173,6 @@ public partial class ContactsPage
 
         if (contact is not null)
             await OnPaginationChanged(metaData.CurrentPage);
-
-        await InvokeAsync(StateHasChanged);
     }
 
     async Task DeleteContactFromHub(string message)
@@ -190,8 +186,6 @@ public partial class ContactsPage
             else
                 await OnPaginationChanged(metaData.CurrentPage);
         }
-
-        await InvokeAsync(StateHasChanged);
     }
     #endregion
 }
